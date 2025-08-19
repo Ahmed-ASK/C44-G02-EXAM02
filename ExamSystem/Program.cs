@@ -54,6 +54,11 @@ namespace ExamSystem
                 }
             }
         }
+        /// <summary>
+        /// Create Subject method prompts the user to enter a new subject ID and name.
+        /// this method called by the <see cref="Main(string[])"> and it will create a new subject and add it to the subjects list.
+        /// </summary>
+        /// <exceptiom cref="ArgumentNullException"></exception>
         private static void CreateSubject()
         {
             Console.Clear();
@@ -90,7 +95,12 @@ namespace ExamSystem
                 NavigateToSubject(subject);
             }
         }
-        
+
+        /// <summary>
+        /// this method displays the list of subjects created by the user if it exists it will wait for the user to choose a subject to navigate into it 
+        /// if not it will return him to the main menu .
+        /// </summary>
+        /// <Exception cref="ArgumentNullException"></exception>
         private static void ShowSubjectsList()
         {
             while (true)
@@ -147,7 +157,15 @@ namespace ExamSystem
                 }
             }
         }
-        
+        /// <summary>
+        /// this is a helper method that will navigate to the subject page
+        /// 1 => Create Exam exam is null <see cref="Subject.CreateExam"> will be called to create the exam for the subject , if the exam already exists, it will ask the user if he wants to replace it or not.
+        /// 2 => Start Exam if the exam is not null <see cref="Exam.Start"> will be called to start the exam for the subject.
+        /// 3 => Return to Subject List will call the <see cref="ShowSubjectsList"> method to show the subjects list again.
+        /// 4 => Return to Main Menu will return to the main menu.
+        /// </summary>
+        /// <param name="subject"></param>
+        /// <Exception cref="ArgumentNullException"></exception>
         private static void NavigateToSubject(Subject subject)
         {
             while (true)

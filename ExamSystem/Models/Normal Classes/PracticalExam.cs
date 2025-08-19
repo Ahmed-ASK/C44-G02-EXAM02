@@ -15,7 +15,12 @@ namespace ExamSystem.Models.Normal_Classes
             : base(ExamType.Practical, examTime, numberOfQuestions)
         {
         }
-
+        /// <summary>
+        /// this method will be called to add a question to the exam in the <see cref="Subject.CreateExam"> method.
+        /// </summary>
+        /// <param name="question"></param>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
         public override void AddQuestion(Question question)
         {
             if (question != null && Questions.Count < NumberOfQuestions)
@@ -35,6 +40,10 @@ namespace ExamSystem.Models.Normal_Classes
                 throw new ArgumentNullException(nameof(question), "Question cannot be null.");
             }
         }
+        /// <summary>
+        ///  This method displays the exam details including the questions, answers, and marks.
+        ///  this will display the exam review in a detailed manner including which answer did the user chose and if he is correct or not,
+        /// </summary>
         public override void Show()
         {
             StringBuilder examDisplay = new StringBuilder();

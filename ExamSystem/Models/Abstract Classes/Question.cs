@@ -79,6 +79,7 @@ namespace ExamSystem.Models.AbstractClasses
             }
             throw new InvalidOperationException(Constants.EmptyAnswerList);
         }
+
         public Answer GetChosenAnswer()
         {
             if (Validators.IsAnswerExists(this))
@@ -88,6 +89,7 @@ namespace ExamSystem.Models.AbstractClasses
             }
             throw new InvalidOperationException(Constants.EmptyAnswerList);
         }
+
         public void SetChosenAnswerId(int id)
         {
             if (Validators.IsValidId(this, id))

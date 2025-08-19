@@ -1,6 +1,7 @@
 using ExamSystem.Logic;
 using ExamSystem.Models.AbstractClasses;
 using ExamSystem.Models.Enums;
+using ExamSystem.Models.Normal_Classes;
 using ExamSystem.UI.Error_Messages;
 using System;
 using System.Collections.Generic;
@@ -48,6 +49,14 @@ namespace ExamSystem.Models.Abstract_Classes
         // Why Abstract?
         // Final Exam => can have TrueFalse & MultipleChoice Questions
         // Midterm Exam => can have MultipleChoice Questions only
+
+        /// <summary>
+        /// this method will be called to add a question to the exam in the <see cref="Subject.CreateExam"> method.
+        /// and depending on the exam type, it will validate the question type.
+        /// </summary>
+        /// <param name="question"></param>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
         public abstract void AddQuestion(Question question);
         public abstract void Show();
         
@@ -81,7 +90,14 @@ namespace ExamSystem.Models.Abstract_Classes
             display.AppendLine($"NUMBER OF QUESTIONS: {NumberOfQuestions}");
             display.AppendLine();
         }
-
+        /// <summary>
+        /// Starts the exam, presenting each question to the user and collecting their answers.
+        /// </summary>
+        /// <remarks>This method initializes the exam process by displaying the exam details, iterating
+        /// through all questions,  and prompting the user to provide answers. It ensures that the exam is properly
+        /// initialized before starting  and throws an exception if the questions are not set. The method also handles
+        /// user input validation for  selecting answers.</remarks>
+        /// <exception cref="InvalidOperationException">Thrown if the exam's questions are not initialized or the question list is empty.</exception>
         public void Start()
         {
             if (Questions.Count == 0)

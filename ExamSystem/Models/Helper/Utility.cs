@@ -9,6 +9,12 @@ namespace ExamSystem.Models.Helper
 {
     public static class Utility
     {
+        /// <summary>
+        /// This Method is used to create a Multiple Choice Question. and from inside this method, the user is prompted to enter the question body, marks, and answers.
+        /// by calling the <see cref="CreatingAnswersForMcQuestion(Question)"> method, the user is prompted to enter the answers for the question.
+        /// allowing for easily mentain the code and add more features in the future.
+        /// </summary>
+        /// <returns></returns>
         public static Question McQuestionCreation() 
         {
             Console.Write(UIMessages.EnterQuestionBody);
@@ -29,7 +35,11 @@ namespace ExamSystem.Models.Helper
                 question.SetRightAnswerId(rightAnswerId);
             return question;
         }
-
+        /// <summary>
+        /// this method is used to create a True/False Question.
+        /// it will make the user enter the question body, marks, and right answer id.
+        /// </summary>
+        /// <returns></returns>
         public static Question TrueFalseQuestionCreation()
         {
             Console.Write(UIMessages.EnterQuestionBody);
@@ -49,7 +59,11 @@ namespace ExamSystem.Models.Helper
                 question.SetRightAnswerId(rightAnswerId);
             return question;
         }
-        public static void CreatingAnswersForMcQuestion(Question question)
+        /// <summary>
+        /// this is a healper method that will create answers for a Multiple Choice Question.
+        /// </summary>
+        /// <param name="question"></param>
+        private static void CreatingAnswersForMcQuestion(Question question)
         {
             Console.WriteLine(UIMessages.CreatingAnswersForThisQuestion);
             if (question?.AnswersList != null)

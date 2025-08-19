@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace ExamSystem.Models.Normal_Classes
 {
+
     public class Subject
     {
         public int Id { get; set; }
@@ -21,6 +22,22 @@ namespace ExamSystem.Models.Normal_Classes
             Name = name;
         }
 
+        /// <summary>
+        /// This method creates an exam for the subject.
+        /// Inside this method, the user is prompted to enter the exam time, type, and number of questions.
+        /// After choosing the exam type, the user is prompted to enter the question type for each question
+        /// if the exam type is Final Exam, the user can choose between True/False or Multiple Choice questions.
+        /// and for each MC Question he must provide the marks for that question answers and right answer id .
+        /// for True/False questions, the user is prompted to enter the question body and the right answer.
+        /// 
+        /// For Practical Exam, the user can only choose Multiple Choice questions.
+        /// And must provide the marks for that question , answers , and right answer id.
+        /// 
+        /// this method will create the exam and assign it to the <see cref="ExamOfTheSubject"> property.
+        /// and depending on the exam type, it will validate the question type and add the questions to the exam.
+        /// using the <see cref="Exam.AddQuestion(Question)"> method.
+        /// which depending on the user choices will call the healper method for creating each question depending on the type he chosen
+        /// </summary>
         public void CreateExam()
         {
             Exam exam = null!;
@@ -71,11 +88,11 @@ namespace ExamSystem.Models.Normal_Classes
                                     switch (questionType)
                                     {
                                         case 1:
-                                            exam.AddQuestion(Utility.TrueFalseQuestionCreation());
+                                            exam.AddQuestion(Utility.TrueFalseQuestionCreation()); // this will call the helper method to create a True/False question
                                             isValidQuestionType = true;
                                             break;
                                         case 2:
-                                            exam.AddQuestion(Utility.McQuestionCreation());
+                                            exam.AddQuestion(Utility.McQuestionCreation()); // this will call the helper method to create a Multiple Choice question
                                             isValidQuestionType = true;
                                             break;
                                     }
@@ -101,7 +118,10 @@ namespace ExamSystem.Models.Normal_Classes
                 ExamOfTheSubject = exam;
             }
         }
-
+        /// <summary>
+        /// This method starts the exam for the subject , but after checking if there is an exam existing in that subject or not .
+        /// </summary>
+        /// <exception cref="NullReferenceException"></exception>
         public void StartExam()
         {
             if (ExamOfTheSubject != null)

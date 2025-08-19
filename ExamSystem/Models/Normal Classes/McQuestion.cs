@@ -11,7 +11,6 @@ namespace ExamSystem.Models.Normal_Classes
 {
     public class McQuestion : Question
     {
-        // SMELLS : Using StringBuilder For Static text and append o n that text later 
         public McQuestion(string? body, int marks) : base(QuestionType.MCQ, body, marks)
         {
             AnswersList = new List<Answer>
