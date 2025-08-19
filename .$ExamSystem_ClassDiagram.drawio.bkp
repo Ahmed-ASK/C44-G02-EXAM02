@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:00:00.000Z" agent="5.0" etag="xxx" version="22.1.16" type="device">
+  <diagram name="ExamSystem-ClassDiagram" id="exam-system-class-diagram">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Program Class -->
+        <mxCell id="program-class" value="&lt;b&gt;Program&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;br&gt;&lt;b&gt;Fields:&lt;/b&gt;&lt;br&gt;- subjects: List&lt;Subject&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;Methods:&lt;/b&gt;&lt;br&gt;+ Main(args: string[]): void&lt;br&gt;+ CreateSubject(): void&lt;br&gt;+ ShowSubjectsList(): void&lt;br&gt;+ NavigateToSubject(subject: Subject): void" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;align=left;verticalAlign=top;spacingLeft=5;spacingRight=5;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="200" height="160" as="geometry" />
+        </mxCell>
+        
+        <!-- Subject Class -->
+        <mxCell id="subject-class" value="&lt;b&gt;Subject&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;br&gt;&lt;b&gt;Properties:&lt;/b&gt;&lt;br&gt;+ Id: int&lt;br&gt;+ Name: string&lt;br&gt;+ ExamOfTheSubject: Exam&lt;br&gt;&lt;br&gt;&lt;b&gt;Methods:&lt;/b&gt;&lt;br&gt;+ Subject(id: int, name: string)&lt;br&gt;+ CreateExam(): void&lt;br&gt;+ StartExam(): void" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;align=left;verticalAlign=top;spacingLeft=5;spacingRight=5;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="320" y="40" width="200" height="160" as="geometry" />
+        </mxCell>
+        
+        <!-- Abstract Exam Class -->
+        <mxCell id="abstract-exam-class" value="&lt;b&gt;&lt;i&gt;&lt;u&gt;Exam&lt;/u&gt;&lt;/i&gt;&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;br&gt;&lt;b&gt;Properties:&lt;/b&gt;&lt;br&gt;+ TypeOfExam: ExamType&lt;br&gt;+ ExamTime: int&lt;br&gt;+ NumberOfQuestions: int&lt;br&gt;+ Questions: ICollection&lt;Question&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;Methods:&lt;/b&gt;&lt;br&gt;+ Exam(type: ExamType, time: int, questions: int)&lt;br&gt;+ {abstract} AddQuestion(question: Question): void&lt;br&gt;+ {abstract} Show(): void&lt;br&gt;+ Start(): void&lt;br&gt;+ CalculateEarnedMarks(): int&lt;br&gt;+ CalculateTotalMarks(): int&lt;br&gt;+ BuildExamHeader(display: StringBuilder): void" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;align=left;verticalAlign=top;spacingLeft=5;spacingRight=5;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="600" y="40" width="240" height="200" as="geometry" />
+        </mxCell>
+        
+        <!-- FinalExam Class -->
+        <mxCell id="final-exam-class" value="&lt;b&gt;FinalExam&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;br&gt;&lt;b&gt;Methods:&lt;/b&gt;&lt;br&gt;+ FinalExam(examTime: int, numberOfQuestions: int)&lt;br&gt;+ AddQuestion(question: Question): void&lt;br&gt;+ Show(): void" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;align=left;verticalAlign=top;spacingLeft=5;spacingRight=5;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="600" y="280" width="200" height="120" as="geometry" />
+        </mxCell>
+        
+        <!-- PracticalExam Class -->
+        <mxCell id="practical-exam-class" value="&lt;b&gt;PracticalExam&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;br&gt;&lt;b&gt;Methods:&lt;/b&gt;&lt;br&gt;+ PracticalExam(examTime: int, numberOfQuestions: int)&lt;br&gt;+ AddQuestion(question: Question): void&lt;br&gt;+ Show(): void" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;align=left;verticalAlign=top;spacingLeft=5;spacingRight=5;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="880" y="280" width="200" height="120" as="geometry" />
+        </mxCell>
+        
+        <!-- Abstract Question Class -->
+        <mxCell id="abstract-question-class" value="&lt;b&gt;&lt;i&gt;&lt;u&gt;Question&lt;/u&gt;&lt;/i&gt;&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;br&gt;&lt;b&gt;Properties:&lt;/b&gt;&lt;br&gt;+ Header: QuestionType&lt;br&gt;+ Body: string&lt;br&gt;+ Marks: int&lt;br&gt;+ ChosenAnswerId: int&lt;br&gt;+ AnswersList: ICollection&lt;Answer&gt;&lt;br&gt;+ RightAnswerId: int&lt;br&gt;&lt;br&gt;&lt;b&gt;Methods:&lt;/b&gt;&lt;br&gt;+ Question(header: QuestionType, body: string, marks: int)&lt;br&gt;+ {abstract} SetRightAnswerId(id: int): void&lt;br&gt;+ {abstract} Clone(): object&lt;br&gt;+ GetAnswerById(id: int): Answer&lt;br&gt;+ GetRightAnswer(): Answer&lt;br&gt;+ GetChosenAnswer(): Answer&lt;br&gt;+ SetChosenAnswerId(id: int): void&lt;br&gt;+ CloneAnswersList(): ICollection&lt;Answer&gt;&lt;br&gt;+ DisplayQuestion(): string&lt;br&gt;+ CompareTo(other: Question): int" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;align=left;verticalAlign=top;spacingLeft=5;spacingRight=5;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="600" y="440" width="240" height="240" as="geometry" />
+        </mxCell>
+        
+        <!-- McQuestion Class -->
+        <mxCell id="mc-question-class" value="&lt;b&gt;McQuestion&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;br&gt;&lt;b&gt;Methods:&lt;/b&gt;&lt;br&gt;+ McQuestion(body: string, marks: int)&lt;br&gt;+ SetRightAnswerId(id: int): void&lt;br&gt;+ Clone(): object&lt;br&gt;+ ToString(): string" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;align=left;verticalAlign=top;spacingLeft=5;spacingRight=5;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="600" y="720" width="200" height="120" as="geometry" />
+        </mxCell>
+        
+        <!-- TrueFalseQuestion Class -->
+        <mxCell id="true-false-question-class" value="&lt;b&gt;TrueFalseQuestion&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;br&gt;&lt;b&gt;Methods:&lt;/b&gt;&lt;br&gt;+ TrueFalseQuestion(body: string, marks: int)&lt;br&gt;+ SetRightAnswerId(id: int): void&lt;br&gt;+ Clone(): object&lt;br&gt;+ ToString(): string" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;align=left;verticalAlign=top;spacingLeft=5;spacingRight=5;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="880" y="720" width="200" height="120" as="geometry" />
+        </mxCell>
+        
+        <!-- Answer Class -->
+        <mxCell id="answer-class" value="&lt;b&gt;Answer&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;br&gt;&lt;b&gt;Properties:&lt;/b&gt;&lt;br&gt;+ Id: int&lt;br&gt;+ AnswerText: StringBuilder&lt;br&gt;&lt;br&gt;&lt;b&gt;Methods:&lt;/b&gt;&lt;br&gt;+ Answer(id: int, text: string)&lt;br&gt;+ Clone(): object&lt;br&gt;+ ToString(): string" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;align=left;verticalAlign=top;spacingLeft=5;spacingRight=5;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="880" y="440" width="200" height="140" as="geometry" />
+        </mxCell>
+        
+        <!-- Utility Class -->
+        <mxCell id="utility-class" value="&lt;b&gt;Utility&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;br&gt;&lt;b&gt;Methods:&lt;/b&gt;&lt;br&gt;+ McQuestionCreation(): Question&lt;br&gt;+ TrueFalseQuestionCreation(): Question&lt;br&gt;+ CreatingAnswersForMcQuestion(question: Question): void" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;align=left;verticalAlign=top;spacingLeft=5;spacingRight=5;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="240" width="200" height="120" as="geometry" />
+        </mxCell>
+        
+        <!-- Validators Class -->
+        <mxCell id="validators-class" value="&lt;b&gt;Validators&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;br&gt;&lt;b&gt;Methods:&lt;/b&gt;&lt;br&gt;+ IsValidBody(body: string): bool&lt;br&gt;+ IsValidMarks(marks: int): bool&lt;br&gt;+ IsValidChosenAnswerId(question: Question, id: int): bool&lt;br&gt;+ IsValidId(question: Question, id: int): bool&lt;br&gt;+ IsAnswerExists(question: Question): bool&lt;br&gt;+ IsValidAnswerText(text: string): bool" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;align=left;verticalAlign=top;spacingLeft=5;spacingRight=5;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="400" width="200" height="140" as="geometry" />
+        </mxCell>
+        
+        <!-- Enums -->
+        <mxCell id="exam-type-enum" value="&lt;b&gt;&lt;i&gt;ExamType&lt;/i&gt;&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;br&gt;Practical = 1&lt;br&gt;Final = 2" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;align=left;verticalAlign=top;spacingLeft=5;spacingRight=5;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="580" width="200" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="question-type-enum" value="&lt;b&gt;&lt;i&gt;QuestionType&lt;/i&gt;&lt;/b&gt;&lt;br&gt;&lt;hr&gt;&lt;br&gt;TrueFalse = 1&lt;br&gt;MCQ = 2" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;align=left;verticalAlign=top;spacingLeft=5;spacingRight=5;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="700" width="200" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- Relationships -->
+        
+        <!-- Program to Subject (Composition) -->
+        <mxCell id="program-subject-relation" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="program-class" target="subject-class">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="240" y="120" as="sourcePoint" />
+            <mxPoint x="320" y="120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="program-subject-label" value="1..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1" vertex="1" connectable="0" parent="program-subject-relation">
+          <mxGeometry x="-0.2" y="1" relative="1" as="geometry">
+            <mxPoint x="1" y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Subject to Exam (Association) -->
+        <mxCell id="subject-exam-relation" value="" style="endArrow=open;endSize=12;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="subject-class" target="abstract-exam-class">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="520" y="120" as="sourcePoint" />
+            <mxPoint x="600" y="120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="subject-exam-label" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1" vertex="1" connectable="0" parent="subject-exam-relation">
+          <mxGeometry x="-0.2" y="1" relative="1" as="geometry">
+            <mxPoint x="1" y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Exam to Question (Composition) -->
+        <mxCell id="exam-question-relation" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="abstract-exam-class" target="abstract-question-class">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="720" y="240" as="sourcePoint" />
+            <mxPoint x="720" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="exam-question-label" value="1..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1" vertex="1" connectable="0" parent="exam-question-relation">
+          <mxGeometry x="-0.2" y="1" relative="1" as="geometry">
+            <mxPoint x="1" y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Question to Answer (Composition) -->
+        <mxCell id="question-answer-relation" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="abstract-question-class" target="answer-class">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="840" y="560" as="sourcePoint" />
+            <mxPoint x="880" y="560" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="question-answer-label" value="1..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontStyle=1" vertex="1" connectable="0" parent="question-answer-relation">
+          <mxGeometry x="-0.2" y="1" relative="1" as="geometry">
+            <mxPoint x="1" y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Inheritance: FinalExam extends Exam -->
+        <mxCell id="final-exam-inheritance" value="" style="endArrow=block;endSize=16;endFill=1;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="final-exam-class" target="abstract-exam-class">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="700" y="280" as="sourcePoint" />
+            <mxPoint x="700" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Inheritance: PracticalExam extends Exam -->
+        <mxCell id="practical-exam-inheritance" value="" style="endArrow=block;endSize=16;endFill=1;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="practical-exam-class" target="abstract-exam-class">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="880" y="280" as="sourcePoint" />
+            <mxPoint x="700" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Inheritance: McQuestion extends Question -->
+        <mxCell id="mc-question-inheritance" value="" style="endArrow=block;endSize=16;endFill=1;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="mc-question-class" target="abstract-question-class">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="700" y="720" as="sourcePoint" />
+            <mxPoint x="700" y="680" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Inheritance: TrueFalseQuestion extends Question -->
+        <mxCell id="true-false-question-inheritance" value="" style="endArrow=block;endSize=16;endFill=1;html=1;rounded=0;strokeWidth=2;" edge="1" parent="1" source="true-false-question-class" target="abstract-question-class">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="880" y="720" as="sourcePoint" />
+            <mxPoint x="700" y="680" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Utility to Question (Dependency) -->
+        <mxCell id="utility-question-relation" value="" style="endArrow=open;endSize=12;html=1;rounded=0;strokeWidth=2;dashed=1;" edge="1" parent="1" source="utility-class" target="abstract-question-class">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="240" y="300" as="sourcePoint" />
+            <mxPoint x="600" y="560" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Validators to Question (Dependency) -->
+        <mxCell id="validators-question-relation" value="" style="endArrow=open;endSize=12;html=1;rounded=0;strokeWidth=2;dashed=1;" edge="1" parent="1" source="validators-class" target="abstract-question-class">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="240" y="470" as="sourcePoint" />
+            <mxPoint x="600" y="560" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- ExamType to Exam (Dependency) -->
+        <mxCell id="exam-type-exam-relation" value="" style="endArrow=open;endSize=12;html=1;rounded=0;strokeWidth=2;dashed=1;" edge="1" parent="1" source="exam-type-enum" target="abstract-exam-class">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="240" y="620" as="sourcePoint" />
+            <mxPoint x="600" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- QuestionType to Question (Dependency) -->
+        <mxCell id="question-type-question-relation" value="" style="endArrow=open;endSize=12;html=1;rounded=0;strokeWidth=2;dashed=1;" edge="1" parent="1" source="question-type-enum" target="abstract-question-class">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="240" y="740" as="sourcePoint" />
+            <mxPoint x="600" y="560" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Title -->
+        <mxCell id="title" value="&lt;b&gt;OOP Exam System - Class Diagram&lt;/b&gt;&lt;br&gt;&lt;font size=&quot;2&quot;&gt;Object-Oriented Programming Exam Management System&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="400" y="10" width="300" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Legend -->
+        <mxCell id="legend-title" value="&lt;b&gt;Legend:&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="800" width="60" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend-inheritance" value="──────► Inheritance (extends)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="820" width="150" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend-composition" value="◆──────► Composition (has-a)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="840" width="150" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend-association" value="──────► Association (uses)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="860" width="150" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend-dependency" value="┈┈┈┈┈┈► Dependency (depends on)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="880" width="150" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend-abstract" value="&lt;i&gt;Abstract Class&lt;/i&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="200" y="820" width="100" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend-enum" value="&lt;i&gt;Enumeration&lt;/i&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="200" y="840" width="100" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend-static" value="&lt;u&gt;Static Class&lt;/u&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="200" y="860" width="100" height="20" as="geometry" />
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
