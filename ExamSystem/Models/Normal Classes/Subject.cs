@@ -27,19 +27,34 @@ namespace ExamSystem.Models.Normal_Classes
             if (ExamOfTheSubject == null)
             {
                 Console.Write("Enter Exam Time: ");
-                int.TryParse(Console.ReadLine(), out int examTime);
+                int examTime;
+                while (!int.TryParse(Console.ReadLine(), out examTime) || examTime <= 0)
+                {
+                    Console.WriteLine(Constants.InvalidExamTime);
+                    Console.Write("Enter Exam Time: ");
+                }
 
                 Console.Write("Enter Exam Type 1 For Final and 2 for Practical: ");
                 bool isValidExamType = false;
                 while (!isValidExamType) 
                 {
-                    int.TryParse(Console.ReadLine(), out int examType);
+                    int examType;
+                    while (!int.TryParse(Console.ReadLine(), out examType) || (examType != 1 && examType != 2))
+                    {
+                        Console.WriteLine(Constants.InvalidExamType);
+                        Console.Write("Enter Exam Type 1 For Final and 2 for Practical: ");
+                    }
+                    int numberOfQuestions;
                     switch (examType)
                     {
                         case 1:
                             isValidExamType = true;
                             Console.Write("Enter Number Of Questions: ");
-                            int.TryParse(Console.ReadLine(), out int numberOfQuestions);
+                            while (!int.TryParse(Console.ReadLine(), out numberOfQuestions) || numberOfQuestions <= 0)
+                            {
+                                Console.WriteLine(Constants.InvalidNumberOfQuestions);
+                                Console.Write("Enter Number Of Questions: ");
+                            }
                             exam = new FinalExam(examTime, numberOfQuestions);
                             for (int i = 0; i < numberOfQuestions; i++)
                             {
@@ -47,7 +62,12 @@ namespace ExamSystem.Models.Normal_Classes
                                 bool isValidQuestionType = false;
                                 while (!isValidQuestionType)
                                 {
-                                    int.TryParse(Console.ReadLine(), out int questionType);
+                                    int questionType;
+                                    while (!int.TryParse(Console.ReadLine(), out questionType) || (questionType != 1 && questionType != 2))
+                                    {
+                                        Console.WriteLine(Constants.InvalidQuestionType);
+                                        Console.Write(UIMessages.EnterQuestionType);
+                                    }
                                     switch (questionType)
                                     {
                                         case 1:
@@ -58,9 +78,6 @@ namespace ExamSystem.Models.Normal_Classes
                                             exam.AddQuestion(Utility.McQuestionCreation());
                                             isValidQuestionType = true;
                                             break;
-                                        default:
-                                            Console.WriteLine(Constants.InvalidQuestionType);
-                                            break;
                                     }
                                 }
                             }
@@ -68,15 +85,16 @@ namespace ExamSystem.Models.Normal_Classes
                         case 2:
                             isValidExamType = true;
                             Console.Write("Enter Number Of Questions: ");
-                            int.TryParse(Console.ReadLine(), out numberOfQuestions);
+                            while (!int.TryParse(Console.ReadLine(), out numberOfQuestions) || numberOfQuestions <= 0)
+                            {
+                                Console.WriteLine(Constants.InvalidNumberOfQuestions);
+                                Console.Write("Enter Number Of Questions: ");
+                            }
                             exam = new PracticalExam(examTime, numberOfQuestions);
                             for (int i = 0; i < numberOfQuestions; i++)
                             {
                                 exam.AddQuestion(Utility.McQuestionCreation());
                             }
-                            break;
-                        default:
-                            Console.WriteLine(Constants.InvalidExamType);
                             break;
                     }
                 }

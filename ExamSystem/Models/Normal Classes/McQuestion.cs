@@ -33,16 +33,15 @@ namespace ExamSystem.Models.Normal_Classes
             };
         }
 
-        public override void SetRightAnswerId(int Id)
+        public override void SetRightAnswerId(int id)
         {
-            if (Validators.IsValidId(this, Id))
+            while (!Validators.IsValidId(this, id))
             {
-                RightAnswerId = Id;
+                Console.WriteLine(Constants.InvalidMcQuestionRightAnswerId);
+                Console.Write("Please enter a valid right answer ID: ");
+                int.TryParse(Console.ReadLine(), out id);
             }
-            else
-            {
-                throw new InvalidOperationException(Constants.InvalidMcQuestionRightAnswerId);
-            }
+            RightAnswerId = id;
         }
         
         public override string ToString()

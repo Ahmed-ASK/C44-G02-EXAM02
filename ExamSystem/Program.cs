@@ -93,57 +93,58 @@ namespace ExamSystem
         
         private static void ShowSubjectsList()
         {
-            Console.Clear();
-            Console.WriteLine("═══════════════════════════════════");
-            Console.WriteLine("          SUBJECTS LIST");
-            Console.WriteLine("═══════════════════════════════════");
-            
-            if (!subjects.Any())
+            while (true)
             {
-                Console.WriteLine("No subjects created yet.");
-                Console.WriteLine("\nPress any key to return to main menu...");
-                Console.ReadKey();
-                return;
-            }
-            
-            Console.WriteLine("Available Subjects:");
-            Console.WriteLine();
-            
-            for (int i = 0; i < subjects.Count; i++)
-            {
-                var subject = subjects[i];
-                string examStatus = subject.ExamOfTheSubject != null ? "✅ Has Exam" : "❌ No Exam";
-                Console.WriteLine($"{i + 1}. {subject.Name} (ID: {subject.Id}) - {examStatus}");
-            }
-            
-            Console.WriteLine($"{subjects.Count + 1}. Return to Main Menu");
-            Console.WriteLine();
-            Console.Write("Choose a subject to navigate to: ");
-            
-            if (int.TryParse(Console.ReadLine(), out int choice))
-            {
-                if (choice > 0 && choice <= subjects.Count)
+                Console.Clear();
+                Console.WriteLine("═══════════════════════════════════");
+                Console.WriteLine("          SUBJECTS LIST");
+                Console.WriteLine("═══════════════════════════════════");
+
+                if (!subjects.Any())
                 {
-                    NavigateToSubject(subjects[choice - 1]);
-                }
-                else if (choice == subjects.Count + 1)
-                {
+                    Console.WriteLine("No subjects created yet.");
+                    Console.WriteLine("\nPress any key to return to main menu...");
+                    Console.ReadKey();
                     return;
+                }
+
+                Console.WriteLine("Available Subjects:");
+                Console.WriteLine();
+
+                for (int i = 0; i < subjects.Count; i++)
+                {
+                    var subject = subjects[i];
+                    string examStatus = subject.ExamOfTheSubject != null ? "✅ Has Exam" : "❌ No Exam";
+                    Console.WriteLine($"{i + 1}. {subject.Name} (ID: {subject.Id}) - {examStatus}");
+                }
+
+                Console.WriteLine($"{subjects.Count + 1}. Return to Main Menu");
+                Console.WriteLine();
+                Console.Write("Choose a subject to navigate to: ");
+
+                if (int.TryParse(Console.ReadLine(), out int choice))
+                {
+                    if (choice > 0 && choice <= subjects.Count)
+                    {
+                        NavigateToSubject(subjects[choice - 1]);
+                    }
+                    else if (choice == subjects.Count + 1)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nInvalid choice!");
+                        Console.WriteLine("Press any key to try again...");
+                        Console.ReadKey();
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("\nInvalid choice!");
+                    Console.WriteLine("\nInvalid input! Please enter a number.");
                     Console.WriteLine("Press any key to try again...");
                     Console.ReadKey();
-                    ShowSubjectsList();
                 }
-            }
-            else
-            {
-                Console.WriteLine("\nInvalid input! Please enter a number.");
-                Console.WriteLine("Press any key to try again...");
-                Console.ReadKey();
-                ShowSubjectsList(); 
             }
         }
         

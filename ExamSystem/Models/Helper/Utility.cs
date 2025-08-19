@@ -56,17 +56,18 @@ namespace ExamSystem.Models.Helper
                 int answerIndex = 1;
                 foreach (var answer in question.AnswersList)
                 {
-                    Console.Write($"Enter answer {answerIndex}: ");
-                    string? answerText = Console.ReadLine();
-                    if (Validators.IsValidAnswerText(answerText))
+                    string? answerText;
+                    do
                     {
-                        answer.AnswerText.Append(answerText);
-                    }
-                    else
-                    {
-                        Console.WriteLine(UIMessages.InvalidAnswer);
-                        answer.AnswerText.Append(" No answer provided");
-                    }
+                        Console.Write($"Enter answer {answerIndex}: ");
+                        answerText = Console.ReadLine();
+                        if (!Validators.IsValidAnswerText(answerText))
+                        {
+                            Console.WriteLine(UIMessages.InvalidAnswer);
+                        }
+                    } while (!Validators.IsValidAnswerText(answerText));
+
+                    answer.AnswerText.Append(answerText);
                     answerIndex++;
                 }
             }
