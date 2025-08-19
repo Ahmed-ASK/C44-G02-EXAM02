@@ -104,22 +104,21 @@ namespace ExamSystem.Models.Abstract_Classes
                 Console.WriteLine(new string('-', 40));
                 Console.WriteLine(question.DisplayQuestion());
                 Console.Write("Your answer: ");
-                
-                if (int.TryParse(Console.ReadLine(), out int chosenAnswerId) && 
-                    Validators.IsValidId(question, chosenAnswerId))
+
+                int chosenAnswerId;
+                while (!int.TryParse(Console.ReadLine(), out chosenAnswerId) ||
+                       !Validators.IsValidId(question, chosenAnswerId))
                 {
-                    question.SetChosenAnswerId(chosenAnswerId);
-                    Console.WriteLine($"Answer {chosenAnswerId} selected.");
-                    
-                    if (questionNumber < NumberOfQuestions)
-                    {
-                        Console.WriteLine("Press any key for next question...");
-                        Console.ReadKey();
-                    }
+                    Console.WriteLine("Invalid answer. Please try again.");
+                    Console.Write("Your answer: ");
                 }
-                else
+                question.SetChosenAnswerId(chosenAnswerId);
+                Console.WriteLine($"Answer {chosenAnswerId} selected.");
+
+                if (questionNumber < NumberOfQuestions)
                 {
-                    throw new InvalidOperationException(Constants.InvalidChosenAnswerId);
+                    Console.WriteLine("Press any key for next question...");
+                    Console.ReadKey();
                 }
                 questionNumber++;
             }

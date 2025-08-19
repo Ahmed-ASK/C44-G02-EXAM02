@@ -49,13 +49,9 @@ namespace ExamSystem.Models.Normal_Classes
 
             int earnedMarks = CalculateEarnedMarks();
             int totalMarks = CalculateTotalMarks();
-
-            examDisplay.AppendLine("FINAL RESULTS:");
-            examDisplay.AppendLine(new string('-', 25));
-            examDisplay.AppendLine($"Your Score: {earnedMarks}/{totalMarks} points");
-            
-            double percentage = (double)earnedMarks / totalMarks * 100;
+            double percentage = totalMarks > 0 ? (double)earnedMarks / totalMarks * 100 : 0;
             examDisplay.AppendLine($"Percentage: {percentage:F1}%");
+            
             examDisplay.AppendLine();
             
             examDisplay.AppendLine("DETAILED REVIEW:");

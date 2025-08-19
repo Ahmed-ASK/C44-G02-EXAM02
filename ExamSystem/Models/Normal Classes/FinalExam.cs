@@ -69,7 +69,9 @@ namespace ExamSystem.Models.Normal_Classes
             examDisplay.AppendLine(new string('-', 25));
             examDisplay.AppendLine($"Your Score: {CalculateEarnedMarks()}/{CalculateTotalMarks()} points");
             
-            double percentage = (double)CalculateEarnedMarks() / CalculateTotalMarks() * 100;
+            int earnedMarks = CalculateEarnedMarks();
+            int totalMarks = CalculateTotalMarks();
+            double percentage = totalMarks > 0 ? (double)earnedMarks / totalMarks * 100 : 0;
             examDisplay.AppendLine($"Percentage: {percentage:F1}%");
 
             Console.WriteLine(examDisplay.ToString());

@@ -96,7 +96,7 @@ namespace ExamSystem.Logic
             {
                 return true;
             }
-            Console.WriteLine("Answer text cannot be empty.");
+            Console.WriteLine(Constants.InvalidQuestionBody); 
             return false;
         }
     }
