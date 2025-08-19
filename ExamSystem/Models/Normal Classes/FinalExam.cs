@@ -55,7 +55,10 @@ namespace ExamSystem.Models.Normal_Classes
                 if (question.ChosenAnswerId > 0)
                 {
                     var chosenAnswer = question.GetAnswerById(question.ChosenAnswerId);
-                    examDisplay.AppendLine($"Your Answer: {chosenAnswer}");
+                    if (chosenAnswer != null)
+                        examDisplay.AppendLine($"Your Answer: {chosenAnswer}");
+                    else
+                        examDisplay.AppendLine("Your Answer: No answer selected");
                 }
                 else
                 {
@@ -71,7 +74,7 @@ namespace ExamSystem.Models.Normal_Classes
             
             int earnedMarks = CalculateEarnedMarks();
             int totalMarks = CalculateTotalMarks();
-            double percentage = totalMarks > 0 ? (double)earnedMarks / totalMarks * 100 : 0;
+            double percentage = totalMarks > 0 ? (double)earnedMarks / totalMarks * 100.0 : 0.0;
             examDisplay.AppendLine($"Percentage: {percentage:F1}%");
 
             Console.WriteLine(examDisplay.ToString());
