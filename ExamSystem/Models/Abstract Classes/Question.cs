@@ -29,19 +29,15 @@ namespace ExamSystem.Models.AbstractClasses
             {
                 if (Validators.IsValidBody(value))
                     body = value;
-                else
-                    throw new ArgumentException(Constants.InvalidQuestionBody);
-            } 
+            }
         }
         public int Marks 
         { 
             get => marks;
             set 
             {
-                if(Validators.IsValidMarks(value))
+                if (Validators.IsValidMarks(value))
                     marks = value;
-                else
-                    throw new ArgumentException(Constants.InvalidQuestionMarks);
             }
         }
         public int ChosenAnswerId
@@ -49,10 +45,8 @@ namespace ExamSystem.Models.AbstractClasses
             get => chosenAnswerId;
             set 
             {
-                if (Validators.IsValidChosenAnswerId(this,value)) 
+                if (Validators.IsValidChosenAnswerId(this, value)) 
                     chosenAnswerId = value;
-                else
-                    throw new ArgumentException(Constants.InvalidChosenAnswerId);
             }
         } 
         #endregion

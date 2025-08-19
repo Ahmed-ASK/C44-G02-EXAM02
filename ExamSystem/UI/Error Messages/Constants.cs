@@ -24,6 +24,7 @@ namespace ExamSystem.UI.Error_Messages
         public const string ExamAlreadyExists = "An Exam With This Name Already Exists";
         public const string InvalidExamTime = "The Exam Time Is Invalid, It Should Be Greater Than 0";
         public const string InvalidExamType = "The Exam Type Is Invalid, It Should Be 1 For Final Exam Or 2 For Practical Exam";
+        public const string InvalidAnswerText = "The Answer Text Is Invalid, It Should Not Be Null Or Empty";
 
     }
 }

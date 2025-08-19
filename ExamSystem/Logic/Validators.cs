@@ -93,10 +93,8 @@ namespace ExamSystem.Logic
         public static bool IsValidAnswerText(string? answerText)
         {
             if (!string.IsNullOrWhiteSpace(answerText))
-            {
                 return true;
-            }
-            Console.WriteLine(Constants.InvalidQuestionBody); 
+            Console.WriteLine(Constants.InvalidAnswerText);
             return false;
         }
     }
