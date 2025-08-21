@@ -1,4 +1,5 @@
-﻿using ExamSystem.Models.Abstract_Classes;
+﻿using ExamSystem.Logic;
+using ExamSystem.Models.Abstract_Classes;
 using ExamSystem.Models.Helper;
 using ExamSystem.UI.Error_Messages;
 using ExamSystem.UI.Messages;
@@ -43,13 +44,8 @@ namespace ExamSystem.Models.Normal_Classes
             Exam exam = null!;
             if (ExamOfTheSubject == null)
             {
-                Console.Write("Enter Exam Time: ");
-                int examTime;
-                while (!int.TryParse(Console.ReadLine(), out examTime) || examTime <= 0)
-                {
-                    Console.WriteLine(Constants.InvalidExamTime);
-                    Console.Write("Enter Exam Time: ");
-                }
+                // Use the new validation helper for positive numbers
+                int examTime = Validators.GetValidPositiveNumber("Enter Exam Time: ");
 
                 Console.Write("Enter Exam Type 1 For Final and 2 for Practical: ");
                 bool isValidExamType = false;
@@ -66,12 +62,7 @@ namespace ExamSystem.Models.Normal_Classes
                     {
                         case 1:
                             isValidExamType = true;
-                            Console.Write("Enter Number Of Questions: ");
-                            while (!int.TryParse(Console.ReadLine(), out numberOfQuestions) || numberOfQuestions <= 0)
-                            {
-                                Console.WriteLine(Constants.InvalidNumberOfQuestions);
-                                Console.Write("Enter Number Of Questions: ");
-                            }
+                            numberOfQuestions = Validators.GetValidPositiveNumber("Enter Number Of Questions: ");
                             exam = new FinalExam(examTime, numberOfQuestions);
                             for (int i = 0; i < numberOfQuestions; i++)
                             {
@@ -101,12 +92,7 @@ namespace ExamSystem.Models.Normal_Classes
                             break;
                         case 2:
                             isValidExamType = true;
-                            Console.Write("Enter Number Of Questions: ");
-                            while (!int.TryParse(Console.ReadLine(), out numberOfQuestions) || numberOfQuestions <= 0)
-                            {
-                                Console.WriteLine(Constants.InvalidNumberOfQuestions);
-                                Console.Write("Enter Number Of Questions: ");
-                            }
+                            numberOfQuestions = Validators.GetValidPositiveNumber("Enter Number Of Questions: ");
                             exam = new PracticalExam(examTime, numberOfQuestions);
                             for (int i = 0; i < numberOfQuestions; i++)
                             {

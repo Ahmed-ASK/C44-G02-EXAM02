@@ -1,4 +1,5 @@
-﻿using ExamSystem.Models.AbstractClasses;
+using ExamSystem.Logic;
+using ExamSystem.Models.AbstractClasses;
 using ExamSystem.Models.Normal_Classes;
 using ExamSystem.Models.Abstract_Classes;
 using ExamSystem.Models.Enums;
@@ -66,20 +67,26 @@ namespace ExamSystem
             Console.WriteLine("        CREATE NEW SUBJECT");
             Console.WriteLine("═══════════════════════════════════");
             
-            Console.Write("Enter Subject ID: ");
-            int.TryParse(Console.ReadLine(), out int id);
-            
-            // Check if ID already exists
-            if (subjects.Any(s => s.Id == id))
+            // Validate Subject ID - must be positive
+            int id;
+            do
             {
-                Console.WriteLine($"\nError: Subject with ID {id} already exists!");
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-                return;
-            }
+                id = Validators.GetValidPositiveNumber("Enter Subject ID: ");
+                
+                // Check if ID already exists
+                if (subjects.Any(s => s.Id == id))
+                {
+                    Console.WriteLine($"\nError: Subject with ID {id} already exists!");
+                    Console.WriteLine("Please choose a different ID.");
+                }
+                else
+                {
+                    break; // ID is valid and unique
+                }
+            } while (true);
             
-            Console.Write("Enter Subject Name: ");
-            string? name = Console.ReadLine();
+            // Validate Subject Name - cannot be empty
+            string name = Validators.GetValidNonEmptyString("Enter Subject Name: ");
             
             Subject subject = new Subject(id, name);
             subjects.Add(subject);

@@ -97,5 +97,58 @@ namespace ExamSystem.Logic
             Console.WriteLine(Constants.InvalidAnswerText);
             return false;
         }
+        
+        public static bool IsValidSubjectName(string? subjectName)
+        {
+            if (!string.IsNullOrWhiteSpace(subjectName))
+            {
+                return true;
+            }
+            Console.WriteLine(Constants.InvalidSubjectName);
+            return false;
+        }
+        
+        public static bool IsValidSubjectId(int subjectId)
+        {
+            if (subjectId > 0)
+            {
+                return true;
+            }
+            Console.WriteLine(Constants.InvalidSubjectId);
+            return false;
+        }
+        
+        public static bool IsValidPositiveNumber(int number)
+        {
+            if (number > 0)
+            {
+                return true;
+            }
+            Console.WriteLine(Constants.InvalidPositiveNumber);
+            return false;
+        }
+        
+        public static int GetValidPositiveNumber(string prompt)
+        {
+            int number;
+            Console.Write(prompt);
+            while (!int.TryParse(Console.ReadLine(), out number) || !IsValidPositiveNumber(number))
+            {
+                Console.Write(prompt);
+            }
+            return number;
+        }
+        
+        public static string GetValidNonEmptyString(string prompt)
+        {
+            string? input;
+            Console.Write(prompt);
+            while (string.IsNullOrWhiteSpace(input = Console.ReadLine()))
+            {
+                Console.WriteLine("Input cannot be empty. Please try again.");
+                Console.Write(prompt);
+            }
+            return input;
+        }
     }
 }

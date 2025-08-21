@@ -17,22 +17,37 @@ namespace ExamSystem.Models.Helper
         /// <returns></returns>
         public static Question McQuestionCreation() 
         {
-            Console.Write(UIMessages.EnterQuestionBody);
-            string? body = Console.ReadLine();
-
-            int marks;
-            Console.Write(UIMessages.EnterQuestionMarks);
-            while (!int.TryParse(Console.ReadLine(), out marks) || !Validators.IsValidMarks(marks))
+            // Validate question body - ensure it's not empty
+            string body;
+            do
             {
-                Console.WriteLine(Constants.InvalidQuestionMarks);
-                Console.Write(UIMessages.EnterQuestionMarks);
-            }
+                Console.Write(UIMessages.EnterQuestionBody);
+                body = Console.ReadLine() ?? string.Empty;
+                if (!Validators.IsValidBody(body))
+                {
+                    Console.WriteLine(Constants.InvalidQuestionBody);
+                }
+            } while (!Validators.IsValidBody(body));
+
+            // Validate marks - ensure it's positive
+            int marks = Validators.GetValidPositiveNumber(UIMessages.EnterQuestionMarks);
 
             var question = new McQuestion(body, marks);
             CreatingAnswersForMcQuestion(question);
-            Console.Write(UIMessages.EnterRightAnswerId);
-            if (int.TryParse(Console.ReadLine(), out int rightAnswerId) && Validators.IsValidId(question, rightAnswerId))
-                question.SetRightAnswerId(rightAnswerId);
+            
+            // Validate right answer ID
+            int rightAnswerId;
+            do
+            {
+                Console.Write(UIMessages.EnterRightAnswerId);
+                while (!int.TryParse(Console.ReadLine(), out rightAnswerId))
+                {
+                    Console.WriteLine("Please enter a valid number.");
+                    Console.Write(UIMessages.EnterRightAnswerId);
+                }
+            } while (!Validators.IsValidId(question, rightAnswerId));
+            
+            question.SetRightAnswerId(rightAnswerId);
             return question;
         }
         /// <summary>
@@ -42,21 +57,36 @@ namespace ExamSystem.Models.Helper
         /// <returns></returns>
         public static Question TrueFalseQuestionCreation()
         {
-            Console.Write(UIMessages.EnterQuestionBody);
-            string? body = Console.ReadLine();
-
-            int marks;
-            Console.Write(UIMessages.EnterQuestionMarks);
-            while (!int.TryParse(Console.ReadLine(), out marks) || !Validators.IsValidMarks(marks))
+            // Validate question body - ensure it's not empty
+            string body;
+            do
             {
-                Console.WriteLine(Constants.InvalidQuestionMarks);
-                Console.Write(UIMessages.EnterQuestionMarks);
-            }
+                Console.Write(UIMessages.EnterQuestionBody);
+                body = Console.ReadLine() ?? string.Empty;
+                if (!Validators.IsValidBody(body))
+                {
+                    Console.WriteLine(Constants.InvalidQuestionBody);
+                }
+            } while (!Validators.IsValidBody(body));
+
+            // Validate marks - ensure it's positive
+            int marks = Validators.GetValidPositiveNumber(UIMessages.EnterQuestionMarks);
 
             var question = new TrueFalseQuestion(body, marks);
-            Console.Write(UIMessages.EnterRightAnswerId);
-            if (int.TryParse(Console.ReadLine(), out int rightAnswerId) && Validators.IsValidId(question, rightAnswerId))
-                question.SetRightAnswerId(rightAnswerId);
+            
+            // Validate right answer ID
+            int rightAnswerId;
+            do
+            {
+                Console.Write(UIMessages.EnterRightAnswerId);
+                while (!int.TryParse(Console.ReadLine(), out rightAnswerId))
+                {
+                    Console.WriteLine("Please enter a valid number.");
+                    Console.Write(UIMessages.EnterRightAnswerId);
+                }
+            } while (!Validators.IsValidId(question, rightAnswerId));
+            
+            question.SetRightAnswerId(rightAnswerId);
             return question;
         }
         /// <summary>
